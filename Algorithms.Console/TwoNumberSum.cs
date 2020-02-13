@@ -8,7 +8,7 @@ namespace Algorithms.Application
         //Brute force array traversal with two for loop.
         //Time Complexity: O(n^2)
         //Space Complexity: O(1)
-        public static int[] TwoNumberSumFirst(int[] array, int targetSum)
+        public static int[] SumUsingTraversal(int[] array, int targetSum)
         {
             for(int i = 0; i < array.Length; i++)
             {
@@ -29,7 +29,7 @@ namespace Algorithms.Application
         //Using hash table data structure with one loop.
         //Time Complexity: O(n)
         //Space Complexity: O(n)
-        public static int[] TwoNumberSumSecond(int[] array, int targetSum)
+        public static int[] SumUsingHashtable(int[] array, int targetSum)
         {
             Dictionary<int, bool> xValues = new Dictionary<int, bool>();
             for(int i = 0; i < array.Length; i++)
@@ -51,7 +51,7 @@ namespace Algorithms.Application
         //Sort the integer array first. After that use two pointer to find the sum out.
         //Time Complexity: sorting array time complexity == O(nlog(n)) and find sum is O(n) ---> O(nlog(n))
         //Space Complexity: O(1)
-        public static int[] TwoNumberSumThird(int[] array, int targetSum)
+        public static int[] SumUsingSorting(int[] array, int targetSum)
         {
             Array.Sort(array);
             int i = 0, j = array.Length - 1; 

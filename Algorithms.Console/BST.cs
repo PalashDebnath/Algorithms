@@ -19,7 +19,7 @@ namespace Algorithms.Application
         //Non Recursive BST Insert
         //Time Complexity: Average Case --> O(log(n)) where the tree is balanced; Worst Case --> O(n) Where we have one long single chain in a tree 
         //Space Complexity: O(1)
-        public BST Insert(int value)
+        public BST IterativeInsert(int value)
         {
             BST current = this;
             while(true)
@@ -55,7 +55,7 @@ namespace Algorithms.Application
         //Non Recursive BST Search
         //Time Complexity: Average Case --> O(log(n)) where the tree is balanced; Worst Case --> O(n) Where we have one long single chain in a tree 
         //Space Complexity: O(1)
-        public bool Contain(int value)
+        public bool IterativeContain(int value)
         {
             BST current = this;
             while(current != null)
@@ -79,13 +79,13 @@ namespace Algorithms.Application
         //Non Recursive BST Delete
         //Time Complexity: Average Case --> O(log(n)) where the tree is balanced; Worst Case --> O(n) Where we have one long single chain in a tree 
         //Space Complexity: O(1)
-        public BST Remove(int value)
+        public BST IterativeRemove(int value)
         {
-            Remove(value, null);
+            IterativeRemove(value, null);
             return this;
         }
 
-        private void Remove(int value, BST parent)
+        private void IterativeRemove(int value, BST parent)
         {
             BST current = this;
             while(current != null)
@@ -105,7 +105,7 @@ namespace Algorithms.Application
                     if(current.left != null && current.right != null)
                     {
                         current.value = current.right.GetMinimumRightChildValue();
-                        current.right.Remove(current.value, current);
+                        current.right.IterativeRemove(current.value, current);
                     }
                     else if(parent == null)
                     {
@@ -143,13 +143,13 @@ namespace Algorithms.Application
         //Time Complexity: Average Case --> O(log(n)) where the tree is balanced; Worst Case --> O(n) Where we have one long single chain in a tree 
         //Space Complexity: Average case --> O(log(n)) where the tree is balanced; Worst Case --> O(n) Where we have one long single chain in a tree
         //                  @@Each Recursive call will hold a frame in call stack      
-        public BST InsertRecursive(int value)
+        public BST RecursiveInsert(int value)
         {
             if(value < this.value)
             {
                 if(this.left != null)
                 {
-                    left.InsertRecursive(value);
+                    left.RecursiveInsert(value);
                 }
                 else
                 {
@@ -160,7 +160,7 @@ namespace Algorithms.Application
             {
                 if(this.right != null)
                 {
-                    right.InsertRecursive(value);
+                    right.RecursiveInsert(value);
                 }
                 else
                 {
@@ -174,17 +174,17 @@ namespace Algorithms.Application
         //Time Complexity: Average Case --> O(lon(n)) where the tree is balanced; Worst Case --> O(n) Where we have one long single chain in a tree 
         //Space Complexity: Average case --> O(log(n)) where the tree is balanced; Worst Case --> O(n) Where we have one long single chain in a tree
         //                  @@Each Recursive call will hold a frame in call stack
-        public bool ContainRecursive(int value)
+        public bool RecursiveContain(int value)
         {
             if(this != null)
             {
                 if(value < this.value)
                 {
-                    return left.ContainRecursive(value);
+                    return left.RecursiveContain(value);
                 }
                 else if(value > this.value)
                 {
-                    return right.ContainRecursive(value);
+                    return right.RecursiveContain(value);
                 }
                 else
                 {
@@ -198,26 +198,26 @@ namespace Algorithms.Application
         //Time Complexity: Average Case --> O(lon(n)) where the tree is balanced; Worst Case --> O(n) Where we have one long single chain in a tree 
         //Space Complexity: Average case --> O(log(n)) where the tree is balanced; Worst Case --> O(n) Where we have one long single chain in a tree
         //                  @@Each Recursive call will hold a frame in call stack
-        public BST RemoveRecursive(int value)
+        public BST RecursiveRemove(int value)
         {
-            RemoveRecursive(value, null);
+            RecursiveRemove(value, null);
             return this;
         }
 
-        private void RemoveRecursive(int value, BST parent)
+        private void RecursiveRemove(int value, BST parent)
         {
             if(value < this.value)
             {
                 if(left != null)
                 {
-                    left.RemoveRecursive(value, this);
+                    left.RecursiveRemove(value, this);
                 }
             }
             else if(value > this.value)
             {
                 if(right != null)
                 {
-                    right.RemoveRecursive(value, this);
+                    right.RecursiveRemove(value, this);
                 }
             }
             else
@@ -225,7 +225,7 @@ namespace Algorithms.Application
                 if(this.left != null && this.right != null)
                 {
                     this.value = this.right.GetMinimumRightChildValue();
-                    this.right.Remove(this.value, this);
+                    this.right.RecursiveRemove(this.value, this);
                 }
                 else if(parent == null)
                 {
@@ -260,7 +260,7 @@ namespace Algorithms.Application
         //Non Recursively find the closest value in BST
         //Time Complexity: Average Case --> O(log(n)) where the tree is balanced; Worst Case --> O(n) Where we have one long single chain in a tree 
         //Space Complexity: O(1)
-        public int FindTheClosestValue(int target)
+        public int IterativeClosestFinder(int target)
         {
             BST current = this;
             int closest = current.value;
@@ -290,9 +290,9 @@ namespace Algorithms.Application
         //Time Complexity: Average Case --> O(lon(n)) where the tree is balanced; Worst Case --> O(n) Where we have one long single chain in a tree 
         //Space Complexity: Average case --> O(log(n)) where the tree is balanced; Worst Case --> O(n) Where we have one long single chain in a tree
         //                  @@Each Recursive call will hold a frame in call stack
-        public int FindTheClosestValueRecursive(int target)
+        public int RecursiveClosestFinder(int target)
         {
-            return FindTheClosestValueRecursive(this, target, this.value);            
+            return RecursiveClosestFinder(this, target, this.value);            
         }
 
         //Recursively find the sum of the branch in BST
@@ -324,7 +324,7 @@ namespace Algorithms.Application
             return sums;
         }
 
-        private int FindTheClosestValueRecursive(BST tree, int target, int closest)
+        private int RecursiveClosestFinder(BST tree, int target, int closest)
         {
             if(Math.Abs(target - closest) > Math.Abs(target - tree.value))
             {
@@ -332,11 +332,11 @@ namespace Algorithms.Application
             }
             if(target < tree.value && tree.left != null)
             {
-                return FindTheClosestValueRecursive(tree.left, target, closest);
+                return RecursiveClosestFinder(tree.left, target, closest);
             }
             else if(target > tree.value && tree.right != null)
             {
-                return FindTheClosestValueRecursive(tree.right, target, closest);
+                return RecursiveClosestFinder(tree.right, target, closest);
             }
             else
             {
