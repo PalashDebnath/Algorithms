@@ -76,5 +76,13 @@ namespace Algorithms.UnitTest
             BST actual = treeTwo.RecursiveRemove(4);
             Assert.AreNotEqual(expected, actual);
         }
+
+        [TestCase]
+        public void ValidateBST()
+        {
+            bool expected = true;
+            bool actual = BST.ValidateBST(treeOne);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

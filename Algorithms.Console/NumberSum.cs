@@ -106,5 +106,77 @@ namespace Algorithms.Application
             } 
             return results;
         }
+
+        //Time Complexity: O(n)
+        //Space Complexity: O(1)
+        public static int MaximumSubsetSumOfNoAdjacent(int[] array)
+        {
+            if(array.Length == 0)
+            {
+                return 0;
+            }
+            else if(array.Length == 1)
+            {
+                return array[0];
+            }
+            else
+            {
+                int firstMax = array[0];
+                int secondMax = Math.Max(array[1], firstMax);
+                for(int i = 2; i < array.Length; i++)
+                {
+                    int temp = secondMax;
+                    secondMax = Math.Max(secondMax, firstMax + array[i]);
+                    firstMax = secondMax;
+                }
+                return secondMax;
+            }            
+        }
+
+        //Time Complexity: O(nd) n --> total number of distinct amount and d --> total number of distinct demon 
+        //Space Complexity: O(n) n --> size of the array of ways.
+        public static int NumberOfWaysToMakeChange(int[] denoms, int targetValue)
+        {
+            int[] ways = new int[targetValue + 1];
+            ways[0] = 1;
+            foreach(int denom in denoms)
+            {
+                for(int eachAmount = 0; eachAmount < targetValue + 1; eachAmount++)
+                {
+                    if(eachAmount >= denom)
+                    {
+                        ways[eachAmount] = ways[eachAmount] + ways[eachAmount - denom];
+                    }
+                }
+            }
+            return ways[targetValue];
+        }
+
+        //Time Complexity: O(nd) n --> total number of distinct amount and d --> total number of distinct demon 
+        //Space Complexity: O(n) n --> size of the array of ways.
+        public static int MinimumNumberOfCoinsForChange(int[] denoms, int targetValue)
+        {
+            int[] coins = new int[targetValue + 1];
+            Array.Fill(coins, Int32.MaxValue);
+            coins[0] = 0;
+            foreach(int denom in denoms)
+            {
+                for(int eachAmount = 0; eachAmount < targetValue + 1; eachAmount++)
+                {
+                    if(eachAmount >= denom)
+                    {
+                        if(coins[eachAmount - denom] == Int32.MaxValue)
+                        {
+                            coins[eachAmount] = Math.Min(coins[eachAmount], Int32.MaxValue);
+                        }
+                        else
+                        {
+                            coins[eachAmount] = Math.Min(coins[eachAmount], 1 + coins[eachAmount - denom]);
+                        }
+                    }
+                }
+            }
+            return coins[targetValue] != Int32.MaxValue ? coins[targetValue] : -1;
+        }
     }
 }

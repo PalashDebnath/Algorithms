@@ -16,6 +16,121 @@ namespace Algorithms.Application
             this.right = null;
         }
 
+        //Time Comlexity : O(n)
+        //Space Complexity: O(d) where d is the depth of the tree. Highest depth of the tree will generate that many frames in call stack
+        public static bool ValidateBST(BST tree)
+        {
+            return ValidateBST(tree, Int32.MinValue, Int32.MaxValue);
+        }
+
+        private static bool ValidateBST(BST tree, int lowest, int highest)
+        {
+            if(tree.left != null && !ValidateBST(tree.left, lowest, tree.value))
+            {                
+                return false;
+            }
+            if(tree.right != null && !ValidateBST(tree.right, tree.value, highest))
+            {
+                return false;
+            }
+            return tree.value >= lowest && tree.value < highest ? true : false;
+        }
+
+        //Time Comlexity : O(n)
+        //Space Complexity: O(d) where d is the depth of the tree. Highest depth of the tree will generate that many frames in call stack
+        public static List<int> InOrderTraverse(BST tree, List<int> array)
+        {
+            if(tree.left != null)
+            {
+                InOrderTraverse(tree.left, array);
+            }
+
+            array.Add(tree.value);
+
+            if(tree.right != null)
+            {
+                InOrderTraverse(tree.right, array);
+            }
+            return array;
+        }
+
+        //Time Comlexity : O(n)
+        //Space Complexity: O(d) where d is the depth of the tree. Highest depth of the tree will generate that many frames in call stack
+        public static List<int> PreOrderTraverse(BST tree, List<int> array)
+        {
+            array.Add(tree.value);
+
+            if(tree.left != null)
+            {
+                PreOrderTraverse(tree.left, array);
+            }            
+            
+            if(tree.right != null)
+            {
+                PreOrderTraverse(tree.right, array);
+            }
+            return array;
+        }
+
+        //Time Comlexity : O(n)
+        //Space Complexity: O(d) where d is the depth of the tree. Highest depth of the tree will generate that many frames in call stack
+        public static List<int> PostOrderTraverse(BST tree, List<int> array)
+        {
+            if(tree.left != null)
+            {
+                PostOrderTraverse(tree.left, array);
+            }            
+            
+            if(tree.right != null)
+            {
+                PostOrderTraverse(tree.right, array);
+            }
+
+            array.Add(tree.value);
+            return array;
+        }
+
+        //Time Complexity: O(n)
+        //Space Complexity: O(n)
+        public static void IterativeInvertBinaryTree(BST tree)
+        {
+            List<BST> queue = new List<BST>();
+            int index = 0;
+            queue.Add(tree);
+            while(index < queue.Count)
+            {
+                BST temp = queue[index].left;
+                queue[index].left = queue[index].right;
+                queue[index].right = temp;
+                if(queue[index].left != null)
+                {
+                    queue.Add(queue[index].left);
+                }
+                if(queue[index].right != null)
+                {
+                    queue.Add(queue[index].right);
+                }
+                index = index + 1;
+            }
+        }
+
+        //Time Comlexity : O(n)
+        //Space Complexity: O(d) where d is the depth of the tree. Highest depth of the tree will generate that many frames in call stack
+        public static void RecursiveInvertBinaryTree(BST tree)
+        {
+            BST temp = tree.left;
+            tree.left = tree.right;
+            tree.right = temp;
+            if(tree.left != null)
+            {
+                RecursiveInvertBinaryTree(tree.left);
+            }
+            if(tree.right != null)
+            {
+                RecursiveInvertBinaryTree(tree.right);
+            }
+        }
+
         //Non Recursive BST Insert
         //Time Complexity: Average Case --> O(log(n)) where the tree is balanced; Worst Case --> O(n) Where we have one long single chain in a tree 
         //Space Complexity: O(1)
@@ -295,6 +410,26 @@ namespace Algorithms.Application
             return RecursiveClosestFinder(this, target, this.value);            
         }
 
+        private int RecursiveClosestFinder(BST tree, int target, int closest)
+        {
+            if(Math.Abs(target - closest) > Math.Abs(target - tree.value))
+            {
+                closest = tree.value;
+            }
+            if(target < tree.value && tree.left != null)
+            {
+                return RecursiveClosestFinder(tree.left, target, closest);
+            }
+            else if(target > tree.value && tree.right != null)
+            {
+                return RecursiveClosestFinder(tree.right, target, closest);
+            }
+            else
+            {
+                return (int)closest;
+            }
+        }
+
         //Recursively find the sum of the branch in BST
         //Time Complexity: Average Case --> O(lon(n)) where the tree is balanced; Worst Case --> O(n) Where we have one long single chain in a tree 
         //Space Complexity: O(log(n)) + O(n/2) --> O(n), Where O(log(n)) is the number of frame in call stack and o(n/2) is the list size which will be equal to the leaf node in the tree ~~ n/2
@@ -322,26 +457,6 @@ namespace Algorithms.Application
                 }
             }
             return sums;
-        }
-
-        private int RecursiveClosestFinder(BST tree, int target, int closest)
-        {
-            if(Math.Abs(target - closest) > Math.Abs(target - tree.value))
-            {
-                closest = tree.value;
-            }
-            if(target < tree.value && tree.left != null)
-            {
-                return RecursiveClosestFinder(tree.left, target, closest);
-            }
-            else if(target > tree.value && tree.right != null)
-            {
-                return RecursiveClosestFinder(tree.right, target, closest);
-            }
-            else
-            {
-                return (int)closest;
-            }
         }
 
         private int GetMinimumRightChildValue()

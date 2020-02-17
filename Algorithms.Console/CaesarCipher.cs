@@ -18,5 +18,20 @@ namespace Algorithms.Application
             }
             return encryptValue.ToString();
         }
+
+        //Time Complexity: O(n)
+        //Space Complexity: O(1)
+        public static string Decryptor(string value, int key)
+        {
+            StringBuilder encryptValue = new StringBuilder();
+            int ascii = 0;
+            for(int i = 0; i < value.Length; i++)
+            {
+                ascii = (int)value[i] - key;
+                ascii = ascii < 97 ? 123 - (97 - ascii) : ascii;
+                encryptValue.Append((char)ascii);
+            }
+            return encryptValue.ToString();
+        }
     }
 }
