@@ -19,5 +19,13 @@ namespace Algorithms.UnitTest
             int actual = Kadan.FindMaximumSumOfSubArray(array);
             Assert.AreEqual(expected, actual);
         }
+
+        [TestCase]
+        public void FindSubArrayOfMaximumSum()
+        {
+            int[] expected = new int[] {1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1};
+            int[] actual = Kadan.FindSubArrayOfMaximumSum(array);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
