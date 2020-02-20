@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Algorithms.UnitTest
 {
-    public class BSTTests
+    public class BinaryTreeTests
     {
         BST treeOne, treeTwo;
 

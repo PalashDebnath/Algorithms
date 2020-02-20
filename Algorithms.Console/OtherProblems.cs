@@ -1,6 +1,6 @@
 namespace Algorithms.Application
 {
-    public class Kadan
+    public class Kadane
     {
         //Time Complexity: O(n)
         //Space Complexity: O(1)

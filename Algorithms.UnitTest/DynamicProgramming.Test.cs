@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace Algorithms.UnitTest
 {
-    public class LevenshteinDistanceTests
+    public class DynamicProgrammingTests
     {
         [SetUp]
         public void Setup()

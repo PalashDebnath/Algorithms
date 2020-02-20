@@ -1,5 +1,17 @@
 namespace Algorithms.Application
 {
+    public class ListNode<T>
+    {
+        public T value;
+        public ListNode<T> prev;
+        public ListNode<T> next;
+
+        public ListNode(T value) 
+        {
+            this.value = value;
+        }
+    }
+    
     public class DoublyLinkedList
     {
         public ListNode<int> head;
@@ -162,18 +174,6 @@ namespace Algorithms.Application
             }
             node.prev = null;
             node.next = null;
-        }
-    }
-
-    public class ListNode<T>
-    {
-        public T value;
-        public ListNode<T> prev;
-        public ListNode<T> next;
-
-        public ListNode(T value) 
-        {
-            this.value = value;
         }
     }
 }

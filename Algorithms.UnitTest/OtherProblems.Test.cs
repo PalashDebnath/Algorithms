@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace Algorithms.UnitTest
 {
-    public class KadaneTests
+    public class OtherTests
     {
         int[] array;
         [SetUp]
@@ -16,7 +16,7 @@ namespace Algorithms.UnitTest
         public void FindMaximumSumOfSubArray()
         {
             int expected = 19;
-            int actual = Kadan.FindMaximumSumOfSubArray(array);
+            int actual = Kadane.FindMaximumSumOfSubArray(array);
             Assert.AreEqual(expected, actual);
         }
 
@@ -24,7 +24,7 @@ namespace Algorithms.UnitTest
         public void FindSubArrayOfMaximumSum()
         {
             int[] expected = new int[] {1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1};
-            int[] actual = Kadan.FindSubArrayOfMaximumSum(array);
+            int[] actual = Kadane.FindSubArrayOfMaximumSum(array);
             Assert.AreEqual(expected, actual);
         }
     }
