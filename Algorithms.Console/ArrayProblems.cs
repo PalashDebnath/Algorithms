@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Algorithms.Application
 {
@@ -106,6 +107,58 @@ namespace Algorithms.Application
             } 
             return results;
         }
+    
+        public static List<int[]> FourNumberUsingTraversal(int[] array, int targetSum)
+        {
+            Dictionary<int, List<int[]>> memorize = new Dictionary<int, List<int[]>>();
+            List<int[]> output = new List<int[]>();
+            for(int i = 0; i < array.Length; i++)
+            {
+                for(int j = i + 1; j < array.Length; j++)
+                {
+                    int firstTwo = array[i] + array[j]; 
+                    if(memorize.ContainsKey(firstTwo))
+                    {
+                        memorize[firstTwo].Add(new int[]{array[i], array[j]});
+                    }
+                    else
+                    {
+                        memorize.Add(firstTwo, new List<int[]>(){new int[]{array[i], array[j]}});
+                    }                        
+                }
+            }
+
+            foreach(var m in memorize)
+            {
+                int temp = targetSum - m.Key;
+                if(memorize.ContainsKey(temp))
+                {
+                    CombineListOfInteger(m.Value, memorize[temp], output);
+                    memorize.Remove(temp);
+                    memorize.Remove(m.Key);
+                }
+            }                      
+            return output;
+        }
+
+        private static void CombineListOfInteger(List<int[]> first, List<int[]> second, List<int[]> output)
+        {
+            foreach(var f in first)
+            {
+                foreach(var s in second)
+                {
+                    if(f[0] != s[0] && f[0] != s[1] && f[1] != s[0] && f[1] != s[1])
+                    {
+                        int[] temp = new int[] {f[0], f[1], s[0], s[1]};
+                        Array.Sort(temp);
+                        if(!output.Exists(e => e[0] == temp[0] && e[1] == temp[1] && e[2] == temp[2]  && e[3] == temp[3]))
+                        {
+                            output.Add(temp);
+                        }
+                    }
+                }
+            }
+        }
     }
     
     public class MoveElement
@@ -161,6 +214,58 @@ namespace Algorithms.Application
             }
             return array;
         }
+    
+        public static List<int> Zigzag(List<List<int>> array)
+        {
+            int row = 0, column = 0, height = array.Count - 1, width = array[0].Count - 1;
+            bool isDown = true;
+            List<int> result = new List<int>();
+            while(column >= 0 && column <= width && row >= 0 && row <= height)
+            {
+                result.Add(array[row][column]);
+                if(isDown)
+                {
+                    if(column == 0 || row == height)
+                    {
+                        isDown = false;
+                        if(row == height)
+                        {
+                            column++;
+                        }
+                        else
+                        {
+                            row++;
+                        }
+                    }
+                    else
+                    {
+                        row++;
+                        column--;
+                    }
+                }
+                else
+                {
+                    if(row == 0 || column == width)
+                    {
+                        isDown = true;
+                        if(column == width)
+                        {
+                            row++;
+                        }
+                        else
+                        {
+                            column++;
+                        }
+                    }
+                    else
+                    {
+                        row--;
+                        column++;
+                    }
+                }
+            }
+            return result;
+        }
     }
 
     public class Find
@@ -204,6 +309,164 @@ namespace Algorithms.Application
                 }
             }
             return new int[] {firstValue, secondValue};
+        }
+
+        //Time Complexity: O(n^2)
+        //Space Complexity: O(1)
+        public static int[] SmallestUnSortedSubArrayIndices_MethodOne(int[] array)
+        {
+            int highest = Int32.MinValue, lowest = Int32.MaxValue;
+            bool swap = true;
+            while(swap)
+            {
+                swap = false;
+                for(int i = 0; i < array.Length - 1; i++)
+                {
+                    if(array[i] > array[i + 1])
+                    {
+                        int temp = array[i];
+                        array[i] = array[i + 1];
+                        array[i + 1] = temp;
+                        highest = highest < i + 1 ? i + 1 : highest;
+                        lowest = lowest > i ? i : lowest;
+                        swap = true;
+                    }
+                }
+            }
+            return new int[] {lowest == Int32.MaxValue ? -1 : lowest,
+                              highest == Int32.MinValue ? -1 : highest};
+        }
+
+        //Time Complexity: O(n)
+        //Space Complexity: O(1)
+        public static int[] SmallestUnSortedSubArrayIndices_MethodTwo(int[] array)
+        {
+            int highest = Int32.MinValue, lowest = Int32.MaxValue;
+            int left = 0, right = array.Length - 1;
+            for(int i = 0; i < array.Length - 1; i++)
+            {
+                if(array[i] > array[i + 1])
+                {
+                    highest = highest < array[i] ? array[i] : highest;
+                    lowest = lowest > array[i + 1] ? array[i + 1] : lowest;
+                }
+            }
+            while(left < array.Length)
+            {
+                if(array[left] > lowest)
+                {
+                    break;
+                }
+                left = left + 1;
+            }
+
+            while(right >= 0)
+            {
+                if(array[right] < highest)
+                {
+                    break;
+                }
+                right = right - 1;
+            }
+
+            return new int[] {lowest == Int32.MaxValue ? -1 : left,
+                              highest == Int32.MinValue ? -1 : right};
+        }
+
+        //Time Complexity: O(n)
+        //Space Complexity: O(n)
+        public static int[] LargestRange(int[] array)
+        {
+            Dictionary<int, bool> memorize = new Dictionary<int, bool>();
+            int rangeLength = 0, start = 0, end = 0;
+            foreach(int num in array)
+            {
+                if(!memorize.ContainsKey(num))
+                {
+                    memorize.Add(num, false);
+                }
+            }
+
+            foreach(int num in array)
+            {
+                int left = num - 1, right = num + 1, length = 0;
+                while(!memorize[num])
+                {
+                    if(memorize.ContainsKey(left))
+                    {
+                        memorize[left] = true;
+                        left =  left - 1;
+                        length = length + 1;
+                    }
+                    else if(memorize.ContainsKey(right))
+                    {
+                        memorize[right] = true;
+                        right = right + 1;
+                        length = length + 1;
+                    }
+                    else
+                    {
+                        memorize[num] = true;
+                        length = length + 1;
+                    }
+                }
+
+                if(rangeLength < length)
+                {
+                    rangeLength = length;
+                    start = left + 1;
+                    end = right - 1;
+                }
+            }
+            return new int[] {start, end};
+        }
+    
+        //Time Complexity: O(n^2)
+        //Space Complexity: O(n)
+        public static int MinimumRewards_MethodOne(int[] scores)
+        {
+            int[] rewards = new int[scores.Length];
+            Array.Fill(rewards, 1);
+            for(int i = 0; i < scores.Length; i++)
+            {
+                int left = i - 1;
+                int right = i;
+                while(left >= 0 && scores[left] > scores[right] && rewards[left] == rewards[right])
+                {
+                    rewards[left] =  rewards[right] + 1;
+                    left = left - 1;
+                    right = right - 1;
+                }
+                if(left >= 0 && scores[left] < scores[i] && left == i - 1)
+                {
+                    rewards[i] = rewards[left] + 1;
+                }
+            }
+            return rewards.Sum();
+        }
+
+        //Time Complexity: O(n)
+        //Space Complexity: O(n)
+        public static int MinimumRewards_MethodTwo(int[] scores)
+        {
+            int[] rewards = new int[scores.Length];
+            Array.Fill(rewards, 1);
+            for(int i = 1; i < scores.Length; i++)
+            {
+                if(scores[i] > scores[i - 1])
+                {
+                    rewards[i] = rewards[i - 1] + 1;
+                }
+            }
+
+            for(int i = scores.Length - 2; i >= 0; i--)
+            {
+                if(scores[i] > scores[i + 1])
+                {
+                    rewards[i] = Math.Max(rewards[i], rewards[i + 1] + 1);
+                }
+            }
+            return rewards.Sum();
         }
     }
 }
