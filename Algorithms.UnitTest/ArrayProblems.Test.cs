@@ -8,7 +8,6 @@ namespace Algorithms.UnitTest
     public class ArrayTests
     {
         int[] array, arrayOne, arrayTwo, arrayThree, arrayFour, arrayFive;
-        List<List<int>> elements;
 
         [SetUp]
         public void Setup()
@@ -19,12 +18,6 @@ namespace Algorithms.UnitTest
             arrayThree = new int[] {12, 3, 1, 2, -6, 5, -8, 6};
             arrayFour = new int[] {-10, -3, -5, 2, 15, -7, 28, -6, 12, 8, 11, 5};
             arrayFive = new int[] {8, 4, 2, 1, 3, 6, 7, 9, 5};
-
-            elements = new List<List<int>>();
-            elements.Add(new List<int>() {1, 3, 4, 10});
-            elements.Add(new List<int>() {2, 5, 9, 11});
-            elements.Add(new List<int>() {6, 8, 12, 15});
-            elements.Add(new List<int>() {7, 13, 14, 16});
         }
 
         [TestCase]
@@ -131,9 +124,126 @@ namespace Algorithms.UnitTest
         [TestCase]
         public void MoveZigzag()
         {
-
+            List<List<int>> elements = new List<List<int>>();
+            elements.Add(new List<int>() {1, 3, 4, 10});
+            elements.Add(new List<int>() {2, 5, 9, 11});
+            elements.Add(new List<int>() {6, 8, 12, 15});
+            elements.Add(new List<int>() {7, 13, 14, 16});
             List<int> expected = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
             List<int> actual = MoveElement.Zigzag(elements);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase]
+        public void ApartmentHunting_MethodOne()
+        {
+            List<Dictionary<string, bool>> blocks = new List<Dictionary<string, bool>>();
+            
+            blocks.Insert(0, new Dictionary<string, bool>());
+            blocks[0]["gym"] = false;
+            blocks[0]["school"] = true;
+            blocks[0]["store"] = false;
+
+            blocks.Insert(1, new Dictionary<string, bool>());
+            blocks[1]["gym"] = true;
+            blocks[1]["school"] = false;
+            blocks[1]["store"] = false;
+
+            blocks.Insert(2, new Dictionary<string, bool>());
+            blocks[2]["gym"] = true;
+            blocks[2]["school"] = true;
+            blocks[2]["store"] = false;
+
+            blocks.Insert(3, new Dictionary<string, bool>());
+            blocks[3]["gym"] = false;
+            blocks[3]["school"] = true;
+            blocks[3]["store"] = false;
+
+            blocks.Insert(4, new Dictionary<string, bool>());
+            blocks[4]["gym"] = false;
+            blocks[4]["school"] = true;
+            blocks[4]["store"] = true;
+
+            string[] reqs = new string[] { "gym", "school", "store" };
+            int expected = 3;
+            int actual = Find.Apartment_MethodOne(blocks, reqs);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase]
+        public void ApartmentHunting_MethodTwo()
+        {
+            List<Dictionary<string, bool>> blocks = new List<Dictionary<string, bool>>();
+            
+            blocks.Insert(0, new Dictionary<string, bool>());
+            blocks[0]["gym"] = true;
+            blocks[0]["pool"] = false;
+            blocks[0]["school"] = true;
+            blocks[0]["store"] = false;
+
+            blocks.Insert(1, new Dictionary<string, bool>());
+            blocks[1]["gym"] = false;
+            blocks[1]["pool"] = false;
+            blocks[1]["school"] = false;
+            blocks[1]["store"] = false;
+
+            blocks.Insert(2, new Dictionary<string, bool>());
+            blocks[2]["gym"] = false;
+            blocks[2]["pool"] = false;
+            blocks[2]["school"] = true;
+            blocks[2]["store"] = false;
+
+            blocks.Insert(3, new Dictionary<string, bool>());
+            blocks[3]["gym"] = false;
+            blocks[3]["pool"] = false;
+            blocks[3]["school"] = false;
+            blocks[3]["store"] = false;
+
+            blocks.Insert(4, new Dictionary<string, bool>());
+            blocks[4]["gym"] = false;
+            blocks[4]["pool"] = false;
+            blocks[4]["school"] = false;
+            blocks[4]["store"] = true;
+
+            blocks.Insert(5, new Dictionary<string, bool>());
+            blocks[5]["gym"] = true;
+            blocks[5]["pool"] = false;
+            blocks[5]["school"] = false;
+            blocks[5]["store"] = false;
+
+            blocks.Insert(6, new Dictionary<string, bool>());
+            blocks[6]["gym"] = false;
+            blocks[6]["pool"] = false;
+            blocks[6]["school"] = false;
+            blocks[6]["store"] = false;
+
+            blocks.Insert(7, new Dictionary<string, bool>());
+            blocks[7]["gym"] = false;
+            blocks[7]["pool"] = false;
+            blocks[7]["school"] = false;
+            blocks[7]["store"] = false;
+
+            blocks.Insert(8, new Dictionary<string, bool>());
+            blocks[8]["gym"] = false;
+            blocks[8]["pool"] = false;
+            blocks[8]["school"] = false;
+            blocks[8]["store"] = false;
+
+            blocks.Insert(9, new Dictionary<string, bool>());
+            blocks[9]["gym"] = false;
+            blocks[9]["pool"] = false;
+            blocks[9]["school"] = true;
+            blocks[9]["store"] = false;
+
+            blocks.Insert(10, new Dictionary<string, bool>());
+            blocks[10]["gym"] = false;
+            blocks[10]["pool"] = true;
+            blocks[10]["school"] = false;
+            blocks[10]["store"] = false;
+
+            string[] reqs = new string[] { "gym", "pool", "school", "store" };
+            int expected = 7;
+            int actual = Find.Apartment_MethodOne(blocks, reqs);
             Assert.AreEqual(expected, actual);
         }
     }
