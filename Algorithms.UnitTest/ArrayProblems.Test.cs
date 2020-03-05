@@ -246,5 +246,30 @@ namespace Algorithms.UnitTest
             int actual = Find.Apartment_MethodOne(blocks, reqs);
             Assert.AreEqual(expected, actual);
         }
+
+        [TestCase]
+        public void CalanderMeeting()
+        {
+            List<Meeting> myCalender = new List<Meeting>();
+            List<Meeting> coworkerCalender = new List<Meeting>();
+            List<Meeting> expected = new List<Meeting>();
+
+            myCalender.Add(new Meeting("9:00", "10:30"));
+            myCalender.Add(new Meeting("12:00", "13:00"));
+            myCalender.Add(new Meeting("16:00", "18:00"));
+
+            coworkerCalender.Add(new Meeting("10:00", "11:30"));
+            coworkerCalender.Add(new Meeting("12:30", "14:30"));
+            coworkerCalender.Add(new Meeting("14:30", "15:00"));
+            coworkerCalender.Add(new Meeting("16:00", "17:00"));
+
+            expected.Add(new Meeting("11:30", "12:00"));
+            expected.Add(new Meeting("15:00", "16:00"));
+            expected.Add(new Meeting("18:00", "18:30"));
+
+            List<Meeting> actual = Find.CalenderMeeting(myCalender, new Meeting("9:00", "20:00"), coworkerCalender, new Meeting("10:00", "18:30"), 30);
+
+            Assert.AreEqual(true, true);
+        }
     }
 }
