@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 
 namespace Algorithms.Application
 {
@@ -8,6 +9,7 @@ namespace Algorithms.Application
         public int value;
         public BinaryTree left;
         public BinaryTree right;
+        public BinaryTree parent;
 
         public BinaryTree(int value)
         {
@@ -119,6 +121,166 @@ namespace Algorithms.Application
             int maxSumAsRootNode = Math.Max(maxSumAsBranch, leftMaxSumAsBranch + rightMaxSumAsBranch + tree.value);
             int maxPathSum = Math.Max(leftMaxSumAsPath, Math.Max(rightMaxSumAsPath, maxSumAsRootNode));
             return new List<int>(){maxSumAsBranch, maxPathSum};            
+        }
+
+        //Time Complexity: O(n)
+        //Space Complexity: O(1)
+        public static void IterativeInOrderTraversal(BinaryTree tree, Action<BinaryTree> callback)
+        {
+            BinaryTree previuos = null;
+            BinaryTree current = tree;
+            while(current != null)
+            {
+                if(previuos == null || current.parent == previuos)
+                {
+                    if(current.left != null)
+                    {
+                        previuos = current;
+                        current = current.left;
+                    }
+                    else if(current.right != null)
+                    {
+                        callback(current);
+                        previuos = current;
+                        current = current.right;
+                    }
+                    else
+                    {
+                        callback(current);
+                        previuos = current;
+                        current = current.parent;
+                    }
+                }
+                else
+                {
+                    if(current.left == previuos)
+                    {
+                        callback(current);
+                        if(current.right != null)
+                        {
+                            previuos = current;
+                            current = current.right;
+                        }
+                        else
+                        {
+                            previuos = current;
+                            current = current.parent;
+                        }
+                    }
+                    else
+                    {
+                        previuos = current;
+                        current = current.parent;
+                    }
+                    
+                }
+            }
+        }
+
+        //Time Complexity: O(n)
+        //Space Complexity: O(1)
+        public static void IterativePreOrderTraversal(BinaryTree tree, Action<BinaryTree> callback)
+        {
+            BinaryTree previuos = null;
+            BinaryTree current = tree;
+            while(current != null)
+            {
+                if(previuos == null || current.parent == previuos)
+                {
+                    if(current.left != null)
+                    {
+                        callback(current);
+                        previuos = current;
+                        current = current.left;
+                    }
+                    else if(current.right != null)
+                    {
+                        previuos = current;
+                        current = current.right;
+                    }
+                    else
+                    {
+                        callback(current);
+                        previuos = current;
+                        current = current.parent;
+                    }
+                }
+                else
+                {
+                    if(current.left == previuos)
+                    {
+                        if(current.right != null)
+                        {
+                            previuos = current;
+                            current = current.right;
+                        }
+                        else
+                        {
+                            previuos = current;
+                            current = current.parent;
+                        }
+                    }
+                    else
+                    {
+                        previuos = current;
+                        current = current.parent;
+                    }
+                    
+                }
+            }
+        }
+
+        //Time Complexity: O(n)
+        //Space Complexity: O(1)
+        public static void IterativePostOrderTraversal(BinaryTree tree, Action<BinaryTree> callback)
+        {
+            BinaryTree previuos = null;
+            BinaryTree current = tree;
+            while(current != null)
+            {
+                if(previuos == null || current.parent == previuos)
+                {
+                    if(current.left != null)
+                    {
+                        previuos = current;
+                        current = current.left;
+                    }
+                    else if(current.right != null)
+                    {
+                        previuos = current;
+                        current = current.right;
+                    }
+                    else
+                    {
+                        callback(current);
+                        previuos = current;
+                        current = current.parent;
+                    }
+                }
+                else
+                {
+                    if(current.left == previuos)
+                    {
+                        if(current.right != null)
+                        {
+                            previuos = current;
+                            current = current.right;
+                        }
+                        else
+                        {
+                            previuos = current;
+                            current = current.parent;
+                        }
+                    }
+                    else
+                    {
+                        callback(current);
+                        previuos = current;
+                        current = current.parent;
+                    }
+                    
+                }
+            }
         }
     }
 }
