@@ -1,8 +1,10 @@
+using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Algorithms.Application
 {
-    public class String
+    public static class String
     {
         //Time Complexity: O(n)
         //Space Complexity: O(1)
@@ -67,10 +69,72 @@ namespace Algorithms.Application
 
             return reverseString.Equals(value);
         }
-    }
+    
+        //Time Complexity: O(n)
+        //Space Complexity: O(Min(n,a)) a repensent number of unique character in the hash table 
+        public static int LengthOfLongestSubstring(string s) {
+            Dictionary<char, int> memorize = new Dictionary<char, int>();
+            int start = 0, maxLength = 0;
+            for(int i = 0; i < s.Length; i++) {
+                if(memorize.ContainsKey(s[i])) {
+                    start = Math.Max(start, memorize[s[i]] + 1);
+                    memorize[s[i]] = i;
+                }
+                else {
+                    memorize.Add(s[i], i);
+                }
+                maxLength = Math.Max(maxLength, i - start + 1);
+            }
+            return maxLength;
+        }
 
-    public class CaesarCipher
-    {
+        //Time Complexity: O(n^2)
+        //Space Complexity: O(n)
+        public static string LongestPalindromicSubstring(string s) {
+            int start = 0, end = 0;
+            for(int i = 0; i < s.Length; i++)
+            {
+                int left = i - 1, right = i + 1;
+                while(left >= 0 && right < s.Length)
+                {
+                    if(s[left] != s[right])
+                    {
+                        break;
+                    }
+                    left = left - 1;
+                    right = right + 1;
+                }
+
+                left = left + 1;
+
+                if((end - start) < (right - left))
+                {
+                    start = left;
+                    end = right;
+                }
+
+                left = i - 1;
+                right = i;
+                while(left >= 0 && right < s.Length)
+                {
+                    if(s[left] != s[right])
+                    {
+                        break;
+                    }
+                    left = left - 1;
+                    right = right + 1;
+                }
+
+                left = left + 1;
+                if((end - start) < (right - left))
+                {
+                    start = left;
+                    end = right;
+                }
+            }
+            return s.Substring(start, end - start);
+        }
+
         //Time Complexity: O(n)
         //Space Complexity: O(1)
         public static string Encryptor(string value, int key)
@@ -99,6 +163,49 @@ namespace Algorithms.Application
                 encryptValue.Append((char)ascii);
             }
             return encryptValue.ToString();
+        }
+
+        //Time Complexity: O(n)
+        //Space Complexity: O(n)
+        public static string ZigzagConversion(string s, int numRows)
+        {
+            StringBuilder result = new StringBuilder();
+            int step = 2 * (numRows - 1);
+            if(numRows == 1)
+            {
+                return s;
+            }
+            for(int i = 0; i < numRows; i++)
+            {
+                if(i == 0 || i == numRows - 1)
+                {
+                    for(int j = i; j < s.Length; j += step)
+                    {
+                        result.Append(s[j]);
+                    }
+                }
+                else
+                {
+                    int j = i;
+                    bool flag = true;
+                    int step1 = 2 * (numRows - 1 - i);
+                    int step2 = step - step1;
+                    while(j < s.Length)
+                    {
+                        result.Append(s[j]);
+                        if(flag)
+                        {
+                            j = j + step1;
+                        }
+                        else
+                        {
+                            j = j + step2;
+                        }
+                        flag = !flag;
+                    }
+                }
+            }
+            return result.ToString();
         }
     }
 }

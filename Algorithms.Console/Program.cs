@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Algorithms.Application
 {
@@ -7,6 +8,7 @@ namespace Algorithms.Application
     {
         static void Main(string[] args)
         {
-        }
+            
+        }    
     }
 }

@@ -47,7 +47,7 @@ namespace Algorithms.UnitTest
         public void Encryptor()
         {
             string expected = "zab";
-            string actual = CaesarCipher.Encryptor("xyz", 2);
+            string actual = String.Encryptor("xyz", 2);
             Assert.AreEqual(expected, actual);
         }
 
@@ -55,7 +55,7 @@ namespace Algorithms.UnitTest
         public void Decryptor()
         {
             string expected = "xyz";
-            string actual = CaesarCipher.Decryptor("zab", 2);
+            string actual = String.Decryptor("zab", 2);
             Assert.AreEqual(expected, actual);
         }
     }
