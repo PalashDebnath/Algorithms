@@ -1,4 +1,4 @@
-using Algorithms.Application;
+using Algorithms.Problems;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -21,45 +21,56 @@ namespace Algorithms.UnitTest
         }
 
         [TestCase]
-        public void SumTwoNumberUsingTraversal()
+        public void TwoNumberSumUsingTraversal()
         {
             int[] expected = {-47, 210};
-            int[] actual = ArrayMethods.TwoNumberSumUsingTraversal(arrayOne, 163);
+            int[] actual = TwoNumberSum.UsingTraversal(arrayOne, 163);
             Array.Sort(actual);
             Assert.AreEqual(actual, expected);
         }
 
         [TestCase]
-        public void SumTwoNumberUsingHashtable()
+        public void TwoNumberSumUsingHashtable()
         {
             int[] expected = {-47, 210};
-            int[] actual = ArrayMethods.TwoNumberSumUsingTraversal(arrayOne, 163);
+            int[] actual = TwoNumberSum.UsingTraversal(arrayOne, 163);
             Array.Sort(actual);
             Assert.AreEqual(actual, expected);
         }
 
         [TestCase]
-        public void SumTwoNumberUsingSorting()
+        public void TwoNumberSumUsingSorting()
         {
             int[] expected = {-47, 210};
-            int[] actual = ArrayMethods.TwoNumberSumUsingTraversal(arrayOne, 163);
+            int[] actual = TwoNumberSum.UsingSorting(arrayOne, 163);
             Array.Sort(actual);
             Assert.AreEqual(actual, expected);
         }
 
         [TestCase]
-        public void SumThreeNumberUsingTraversal()
+        public void ThreeNumberSumUsingTraversal()
         {
             List<int[]> expected = new List<int[]>();
             expected.Add(new int[] { -8, 2, 6 });
             expected.Add(new int[] { -8, 3, 5 });
             expected.Add(new int[] { -6, 1, 5 });
-            List<int[]> actual = ArrayMethods.ThreeNumberSum(arrayThree, 0);
+            List<int[]> actual = ThreeNumberSum.UsingTraversal(arrayThree, 0);
             Assert.AreEqual(actual, expected);
         }
 
         [TestCase]
-        public void SumFourNumberUsingTraversal()
+        public void ThreeNumberSumUsingSorting()
+        {
+            List<int[]> expected = new List<int[]>();
+            expected.Add(new int[] { -8, 2, 6 });
+            expected.Add(new int[] { -8, 3, 5 });
+            expected.Add(new int[] { -6, 1, 5 });
+            List<int[]> actual = ThreeNumberSum.UsingSorting(arrayThree, 0);
+            Assert.AreEqual(actual, expected);
+        }
+
+        [TestCase]
+        public void FourNumberSumUsingTraversal()
         {
             List<int[]> expected = new List<int[]>();
             expected.Add(new int[] {-10, -3, 5, 28});
@@ -69,7 +80,7 @@ namespace Algorithms.UnitTest
             expected.Add(new int[] {-5, 2, 8, 15});          
             expected.Add(new int[] {-5, 2, 11, 12});
             expected.Add(new int[] {-5, 5, 8, 12});
-            List<int[]> actual = ArrayMethods.FourNumberSum(arrayFour, 20);
+            List<int[]> actual = FourNumberSum.UsingHashTable(arrayFour, 20);
             Assert.AreEqual(expected, actual);
         }
 
@@ -77,7 +88,7 @@ namespace Algorithms.UnitTest
         public void FindSmallestDifference()
         {
             int[] expected = new int[] {4, 3};
-            int[] actual = ArrayMethods.FindSmallestDifference(arrayOne, arrayTwo);
+            int[] actual = SmallestDifference.Find(arrayOne, arrayTwo);
             Assert.AreEqual(expected, actual);
         }
 
@@ -85,7 +96,7 @@ namespace Algorithms.UnitTest
         public void FindLargestRange()
         {
             int[] expected = new int[] {1, 3};
-            int[] actual = ArrayMethods.FindLargestRange(arrayThree);
+            int[] actual = LargestRange.Find(arrayThree);
             Assert.AreEqual(expected, actual);
         }
 
@@ -93,7 +104,7 @@ namespace Algorithms.UnitTest
         public void FindMinimunRewardsMethodOne()
         {
             int expected = 25;
-            int actual = ArrayMethods.FindMinimumRewards_MethodOne(arrayFive);
+            int actual = MinimumRewards.FindMethodOne(arrayFive);
             Assert.AreEqual(expected, actual);
         }
 
@@ -101,7 +112,7 @@ namespace Algorithms.UnitTest
         public void FindMinimunRewardsMethodTwo()
         {
             int expected = 25;
-            int actual = ArrayMethods.FindMinimumRewards_MethodTwo(arrayFive);
+            int actual = MinimumRewards.FindMethodTwo(arrayFive);
             Assert.AreEqual(expected, actual);
         }
 
@@ -109,7 +120,7 @@ namespace Algorithms.UnitTest
         public void MoveSimilarElementToStart()
         {
             int[] expected = new int[] {2, 2, 2, 2, 2, 3, 4, 1};
-            int[] actual = ArrayMethods.MoveElementToStart(array, 2);
+            int[] actual = MoveElement.ToStart(array, 2);
             Assert.AreEqual(expected, actual);
         }
 
@@ -117,12 +128,12 @@ namespace Algorithms.UnitTest
         public void MoveSimilarElementToEnd()
         {
             int[] expected = new int[] {4, 1, 3, 2, 2, 2, 2, 2};
-            int[] actual = ArrayMethods.MoveElementToEnd(array, 2);
+            int[] actual = MoveElement.ToEnd(array, 2);
             Assert.AreEqual(expected, actual);
         }
 
         [TestCase]
-        public void MoveZigzag()
+        public void ZigzagTraversal()
         {
             List<List<int>> elements = new List<List<int>>();
             elements.Add(new List<int>() {1, 3, 4, 10});
@@ -130,12 +141,12 @@ namespace Algorithms.UnitTest
             elements.Add(new List<int>() {6, 8, 12, 15});
             elements.Add(new List<int>() {7, 13, 14, 16});
             List<int> expected = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
-            List<int> actual = ArrayMethods.Zigzag(elements);
+            List<int> actual = Zigzag.Traverse(elements);
             Assert.AreEqual(expected, actual);
         }
 
         [TestCase]
-        public void ApartmentHunting_MethodOne()
+        public void FindApartmentMethodOne()
         {
             List<Dictionary<string, bool>> blocks = new List<Dictionary<string, bool>>();
             
@@ -166,12 +177,12 @@ namespace Algorithms.UnitTest
 
             string[] reqs = new string[] { "gym", "school", "store" };
             int expected = 3;
-            int actual = ArrayMethods.FindApartment_MethodOne(blocks, reqs);
+            int actual = Apartment.FindMethodOne(blocks, reqs);
             Assert.AreEqual(expected, actual);
         }
 
         [TestCase]
-        public void ApartmentHunting_MethodTwo()
+        public void FindApartmentMethodTwo()
         {
             List<Dictionary<string, bool>> blocks = new List<Dictionary<string, bool>>();
             
@@ -243,12 +254,12 @@ namespace Algorithms.UnitTest
 
             string[] reqs = new string[] { "gym", "pool", "school", "store" };
             int expected = 7;
-            int actual = ArrayMethods.FindApartment_MethodOne(blocks, reqs);
+            int actual = Apartment.FindMethodOne(blocks, reqs);
             Assert.AreEqual(expected, actual);
         }
 
         [TestCase]
-        public void CalanderMeeting()
+        public void FindAvailableMeetingSlots()
         {
             List<Meeting> myCalender = new List<Meeting>();
             List<Meeting> coworkerCalender = new List<Meeting>();
@@ -267,7 +278,7 @@ namespace Algorithms.UnitTest
             expected.Add(new Meeting("15:00", "16:00"));
             expected.Add(new Meeting("18:00", "18:30"));
 
-            List<Meeting> actual = Meeting.CalenderMeeting(myCalender, new Meeting("9:00", "20:00"), coworkerCalender, new Meeting("10:00", "18:30"), 30);
+            List<Meeting> actual = CalenderMatching.Availability(myCalender, new Meeting("9:00", "20:00"), coworkerCalender, new Meeting("10:00", "18:30"), 30);
 
             Assert.AreEqual(true, true);
         }

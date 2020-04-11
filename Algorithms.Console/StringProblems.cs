@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Algorithms.Application
 {
-    public static class String
+    public static class CString
     {
         //Time Complexity: O(n)
         //Space Complexity: O(1)

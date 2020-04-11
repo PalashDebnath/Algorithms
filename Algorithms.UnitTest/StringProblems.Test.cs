@@ -15,7 +15,7 @@ namespace Algorithms.UnitTest
         public void IsPalindromeCheckUsingTraversal()
         {
             bool expected = true;
-            bool actual = String.CheckPalindroneUsingTraversal("abcdcba");
+            bool actual = CString.CheckPalindroneUsingTraversal("abcdcba");
             Assert.AreEqual(expected, actual);
         }
 
@@ -23,7 +23,7 @@ namespace Algorithms.UnitTest
         public void IsNotPalindromeCheckUsingTraversal()
         {
             bool expected = false;
-            bool actual = String.CheckPalindroneUsingTraversal("palash");
+            bool actual = CString.CheckPalindroneUsingTraversal("palash");
             Assert.AreEqual(expected, actual);
         }
 
@@ -31,7 +31,7 @@ namespace Algorithms.UnitTest
         public void IsPalindromeCheckUsingRecursive()
         {
             bool expected = true;
-            bool actual = String.CheckPalindromeUsingRecursion("abcdcba");
+            bool actual = CString.CheckPalindromeUsingRecursion("abcdcba");
             Assert.AreEqual(expected, actual);
         }
 
@@ -39,7 +39,7 @@ namespace Algorithms.UnitTest
         public void IsNotPalindromeCheckUsingRecursive()
         {
             bool expected = false;
-            bool actual = String.CheckPalindromeUsingRecursion("palash");
+            bool actual = CString.CheckPalindromeUsingRecursion("palash");
             Assert.AreEqual(expected, actual);
         }
 
@@ -47,7 +47,7 @@ namespace Algorithms.UnitTest
         public void Encryptor()
         {
             string expected = "zab";
-            string actual = String.Encryptor("xyz", 2);
+            string actual = CString.Encryptor("xyz", 2);
             Assert.AreEqual(expected, actual);
         }
 
@@ -55,7 +55,7 @@ namespace Algorithms.UnitTest
         public void Decryptor()
         {
             string expected = "xyz";
-            string actual = String.Decryptor("zab", 2);
+            string actual = CString.Decryptor("zab", 2);
             Assert.AreEqual(expected, actual);
         }
     }
