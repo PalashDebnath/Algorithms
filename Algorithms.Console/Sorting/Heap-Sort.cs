@@ -4,45 +4,69 @@ namespace Algorithms.Problems
 {
     public static class Heap
     {
-        public static int[] SortAscending(int[] array)
+        public enum OrderBy
         {
-            MaxHeapBuilder(array);
+            ASC,
+            DESC
+        }
+        public static int[] Sort(int[] array, OrderBy orderBy = OrderBy.DESC)
+        {
+            Func<int, int, bool> compare;
+            if(orderBy == OrderBy.ASC)
+            {
+                compare = (a, b) => a > b;
+            }
+            else
+            {
+                compare = (a, b) => a < b;
+            }
+
+            HeapBuilder(array, compare);
             for (int endIndex = array.Length - 1; endIndex > 0; endIndex--)
             {
                 Swap(0, endIndex, array);
-                SiftMaxValueAtTheTop(0, endIndex - 1, array);
+                SiftDown(0, endIndex - 1, array, compare);
             }
             return array;
         }
 
-        public static int[] SortDecending(int[] array)
-        {
-            MinHeapBuilder(array);
-            for (int endIndex = array.Length - 1; endIndex > 0; endIndex--)
-            {
-                Swap(0, endIndex, array);
-                SiftMinValueAtTheTop(0, endIndex - 1, array);
-            }            
-            return array;
-        }
-
-        private static void MinHeapBuilder(int[] array)
+        private static void HeapBuilder(int[] array, Func<int, int, bool> compare)
         {
             int firstParentIndex = (array.Length - 2) / 2;
             int endIndex = array.Length - 1;
             for (int currentIndex = firstParentIndex; currentIndex >= 0; currentIndex--)
             {
-                SiftMinValueAtTheTop(currentIndex, endIndex, array);
+                SiftDown(currentIndex, endIndex, array, compare);
             }
         }
 
-        private static void MaxHeapBuilder(int[] array)
+        private static void SiftDown(int currentIndex, int endIndex, int[] array, Func<int, int, bool> compare)
         {
-            int firstParentIndex = (array.Length - 2) / 2;
-            int endIndex = array.Length - 1;
-            for (int currentIndex = firstParentIndex; currentIndex >= 0; currentIndex--)
+            int firstChildIndex = currentIndex * 2 + 1;
+            while(firstChildIndex <= endIndex)
             {
-                SiftMaxValueAtTheTop(currentIndex, endIndex, array);
+                int secondChildIndex = currentIndex * 2 + 2 <= endIndex ? currentIndex * 2 + 2 : -1;
+                int targetIndex;
+
+                if(secondChildIndex != -1 && compare(array[secondChildIndex], array[firstChildIndex]))
+                {
+                    targetIndex = secondChildIndex;
+                }
+                else
+                {
+                    targetIndex = firstChildIndex;
+                }
+
+                if(compare(array[targetIndex], array[currentIndex]))
+                {
+                    Swap(currentIndex, targetIndex, array);
+                    currentIndex = targetIndex;
+                    firstChildIndex = currentIndex * 2 + 1;
+                }
+                else
+                {
+                    break;
+                }
             }
         }
 
@@ -51,66 +75,6 @@ namespace Algorithms.Problems
             int temp = array[sourceIndex];
             array[sourceIndex] = array[targetIndex];
             array[targetIndex] = temp;
-        }
-
-        private static void SiftMaxValueAtTheTop(int currentIndex, int endIndex, int[] array)
-        {
-            int firstChildIndex = currentIndex * 2 + 1;
-            while(firstChildIndex <= endIndex)
-            {
-                int secondChildIndex = currentIndex * 2 + 2 <= endIndex ? currentIndex * 2 + 2 : -1;
-                int targetIndex;
-
-                if(secondChildIndex != -1 && array[secondChildIndex] > array[firstChildIndex])
-                {
-                    targetIndex = secondChildIndex;
-                }
-                else
-                {
-                    targetIndex = firstChildIndex;
-                }
-
-                if(array[targetIndex] > array[currentIndex])
-                {
-                    Swap(currentIndex, targetIndex, array);
-                    currentIndex = targetIndex;
-                    firstChildIndex = currentIndex * 2 + 1;
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }
-
-        private static void SiftMinValueAtTheTop(int currentIndex, int endIndex, int[] array)
-        {
-            int firstChildIndex = currentIndex * 2 + 1;
-            while(firstChildIndex <= endIndex)
-            {
-                int secondChildIndex = currentIndex * 2 + 2 <= endIndex ? currentIndex * 2 + 2 : -1;
-                int targetIndex;
-
-                if(secondChildIndex != -1 && array[secondChildIndex] < array[firstChildIndex])
-                {
-                    targetIndex = secondChildIndex;
-                }
-                else
-                {
-                    targetIndex = firstChildIndex;
-                }
-
-                if(array[targetIndex] < array[currentIndex])
-                {
-                    Swap(currentIndex, targetIndex, array);
-                    currentIndex = targetIndex;
-                    firstChildIndex = currentIndex * 2 + 1;
-                }
-                else
-                {
-                    break;
-                }
-            }
         }
     }
 }

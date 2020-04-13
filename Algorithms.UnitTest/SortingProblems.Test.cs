@@ -49,7 +49,7 @@ namespace Algorithms.UnitTest
         public void HeapSort()
         {
             int[] expected = new int[] {-541, -27, -18, -17, -8, -7, -7, -3, -2, -1, 7};
-            int[] actual = Heap.SortAscending(array);
+            int[] actual = Heap.Sort(array, Heap.OrderBy.ASC);
             Assert.AreEqual(expected, actual);
         }
 
