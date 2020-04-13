@@ -73,13 +73,13 @@ namespace Algorithms.UnitTest
         public void FourNumberSumUsingTraversal()
         {
             List<int[]> expected = new List<int[]>();
-            expected.Add(new int[] {-10, -3, 5, 28});
-            expected.Add(new int[] {-7, -6, 5, 28});
-            expected.Add(new int[] {-10, -6, 8, 28});
-            expected.Add(new int[] {-7, -3, 2, 28});
-            expected.Add(new int[] {-5, 2, 8, 15});          
-            expected.Add(new int[] {-5, 2, 11, 12});
-            expected.Add(new int[] {-5, 5, 8, 12});
+            expected.Add(new int[] {2, -5, 15, 8});
+            expected.Add(new int[] {2, -3, -7, 28});
+            expected.Add(new int[] {-3, -10, 28, 5});            
+            expected.Add(new int[] {28, -10, -6, 8});
+            expected.Add(new int[] {28, -7, -6, 5});          
+            expected.Add(new int[] {2, -5, 12, 11});
+            expected.Add(new int[] {12, -5, 8, 5});
             List<int[]> actual = FourNumberSum.UsingHashTable(arrayFour, 20);
             Assert.AreEqual(expected, actual);
         }

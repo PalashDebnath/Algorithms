@@ -1,4 +1,4 @@
-using Algorithms.Application;
+using Algorithms.Problems;
 using NUnit.Framework;
 
 namespace Algorithms.UnitTest
@@ -17,7 +17,7 @@ namespace Algorithms.UnitTest
         public void BubbleSort()
         {
             int[] expected = new int[] {-541, -27, -18, -17, -8, -7, -7, -3, -2, -1, 7};
-            int[] actual = Sort.Bubble(array);
+            int[] actual = Bubble.Sort(array);
             Assert.AreEqual(expected, actual);
         }
 
@@ -25,7 +25,7 @@ namespace Algorithms.UnitTest
         public void InsertionSort()
         {
             int[] expected = new int[] {-541, -27, -18, -17, -8, -7, -7, -3, -2, -1, 7};
-            int[] actual = Sort.Insertion(array);
+            int[] actual = Insertion.Sort(array);
             Assert.AreEqual(expected, actual);
         }
 
@@ -33,7 +33,31 @@ namespace Algorithms.UnitTest
         public void SelectionSort()
         {
             int[] expected = new int[] {-541, -27, -18, -17, -8, -7, -7, -3, -2, -1, 7};
-            int[] actual = Sort.Selection(array);
+            int[] actual = Selection.Sort(array);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase]
+        public void QuickSort()
+        {
+            int[] expected = new int[] {-541, -27, -18, -17, -8, -7, -7, -3, -2, -1, 7};
+            int[] actual = Quick.Sort(array);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase]
+        public void HeapSort()
+        {
+            int[] expected = new int[] {-541, -27, -18, -17, -8, -7, -7, -3, -2, -1, 7};
+            int[] actual = Heap.SortAscending(array);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase]
+        public void MergeSort()
+        {
+            int[] expected = new int[] {-541, -27, -18, -17, -8, -7, -7, -3, -2, -1, 7};
+            int[] actual = Merge.Sort(array);
             Assert.AreEqual(expected, actual);
         }
     }

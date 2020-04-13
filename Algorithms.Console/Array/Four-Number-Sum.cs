@@ -11,6 +11,7 @@ namespace Algorithms.Problems
         {
             Dictionary<int, List<int[]>> memorize = new Dictionary<int, List<int[]>>();
             List<int[]> output = new List<int[]>();
+            
             for(int i = 1; i < array.Length - 1; i++)
             {
                 for(int j = i + 1; j < array.Length; j++)

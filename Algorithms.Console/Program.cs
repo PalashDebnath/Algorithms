@@ -10,16 +10,16 @@ namespace Algorithms.Problems
     {
         public static void Main(string[] args)
         {
-            List<int[]> abcd = FourNumberSum.UsingHashTable(new int[] {1, 2, 3, 4, 5, 6, 7}, 10);
-            foreach (var item in abcd)
+            List<int[]> sort = FourNumberSum.UsingHashTable(new int[] {-10, -3, -5, 2, 15, -7, 28, -6, 12, 8, 11, 5}, 20);
+            foreach (var s in sort)
             {
-                foreach (var i in item)
+                foreach (var item in s)
                 {
-                    Console.Write(i);
+                    Console.Write(item);
                     Console.Write(" ");
                 }
                 Console.WriteLine();
-            }
+            }            
         }
     }
 }
