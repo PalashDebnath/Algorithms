@@ -10,7 +10,6 @@ namespace Algorithms.Problems
     {
         public static void Main(string[] args)
         {
-            
         }
     }
 }

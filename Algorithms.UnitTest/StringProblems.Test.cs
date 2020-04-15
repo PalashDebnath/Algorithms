@@ -1,4 +1,4 @@
-using Algorithms.Application;
+using Algorithms.Problems;
 using NUnit.Framework;
 
 namespace Algorithms.UnitTest
@@ -15,7 +15,7 @@ namespace Algorithms.UnitTest
         public void IsPalindromeCheckUsingTraversal()
         {
             bool expected = true;
-            bool actual = CString.CheckPalindroneUsingTraversal("abcdcba");
+            bool actual = Palindrome.CheckIteratively("abcdcba");
             Assert.AreEqual(expected, actual);
         }
 
@@ -23,7 +23,7 @@ namespace Algorithms.UnitTest
         public void IsNotPalindromeCheckUsingTraversal()
         {
             bool expected = false;
-            bool actual = CString.CheckPalindroneUsingTraversal("palash");
+            bool actual = Palindrome.CheckIteratively("palash");
             Assert.AreEqual(expected, actual);
         }
 
@@ -31,7 +31,7 @@ namespace Algorithms.UnitTest
         public void IsPalindromeCheckUsingRecursive()
         {
             bool expected = true;
-            bool actual = CString.CheckPalindromeUsingRecursion("abcdcba");
+            bool actual = Palindrome.CheckRecursively("abcdcba");
             Assert.AreEqual(expected, actual);
         }
 
@@ -39,7 +39,7 @@ namespace Algorithms.UnitTest
         public void IsNotPalindromeCheckUsingRecursive()
         {
             bool expected = false;
-            bool actual = CString.CheckPalindromeUsingRecursion("palash");
+            bool actual = Palindrome.CheckRecursively("palash");
             Assert.AreEqual(expected, actual);
         }
 
@@ -47,7 +47,7 @@ namespace Algorithms.UnitTest
         public void Encryptor()
         {
             string expected = "zab";
-            string actual = CString.Encryptor("xyz", 2);
+            string actual = CaesarCypher.Encryptor("xyz", 2);
             Assert.AreEqual(expected, actual);
         }
 
@@ -55,7 +55,23 @@ namespace Algorithms.UnitTest
         public void Decryptor()
         {
             string expected = "xyz";
-            string actual = CString.Decryptor("zab", 2);
+            string actual = CaesarCypher.Decryptor("zab", 2);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase]
+        public void LengthOfLongestSubstringWithoutDuplication()
+        {
+            int expected = 3;
+            int actual = LongestSubstringWithoutDuplication.Length("abcabcbb");
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase]
+        public void ValueOfLongestSubstringWithoutDuplication()
+        {
+            string expected = "abc";
+            string actual = LongestSubstringWithoutDuplication.Value("abcabcbb");
             Assert.AreEqual(expected, actual);
         }
     }
