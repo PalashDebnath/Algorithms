@@ -4,6 +4,8 @@ namespace Algorithms.Problems
 {
     public static class SmallestSubstring
     {
+        //Time Complexity: O(n + m) n --> Length of the big string, m --> Length of the small string
+        //Space Complexity: O(n + m)
         public static string Containing(string bigstring, string smallstring)
         {
             Dictionary<char, int> targetCharCounts = GetCharacterCount(smallstring);

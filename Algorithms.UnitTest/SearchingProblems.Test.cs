@@ -1,4 +1,4 @@
-using Algorithms.Application;
+using Algorithms.Problems;
 using NUnit.Framework;
 
 namespace Algorithms.UnitTest
@@ -18,7 +18,7 @@ namespace Algorithms.UnitTest
         public void IterativeBinarySearch()
         {
             int expected = 4;
-            int actual = Search.IterativeBinarySearch(sortedArray, 150);
+            int actual = BinarySearch.ElementIteratively(sortedArray, 150);
             Assert.AreEqual(expected, actual);
         }
 
@@ -26,15 +26,15 @@ namespace Algorithms.UnitTest
         public void RecursiveBinarySearch()
         {
             int expected = 4;
-            int actual = Search.RecursiveBinarySearch(sortedArray, 150);
+            int actual = BinarySearch.ElementRecursively(sortedArray, 150);
             Assert.AreEqual(expected, actual);
         }
 
         [TestCase]
-        public void ThreeLargestNumbers()
+        public void FindThreeLargestNumbers()
         {
             int[] expected = new int[] {-2, -1, 7};
-            int[] actual = Search.ThreeLargestNumbers(array);
+            int[] actual = ThreeLargestNumbers.Find(array);
             Assert.AreEqual(expected, actual);
         }
     }
