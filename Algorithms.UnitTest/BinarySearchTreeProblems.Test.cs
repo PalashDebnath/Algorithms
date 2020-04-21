@@ -1,4 +1,4 @@
-using Algorithms.Application;
+using Algorithms.Problems;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -25,7 +25,7 @@ namespace Algorithms.UnitTest
         public void IterativeClosestFinder()
         {
             int expected = -51;
-            int actual = treeOne.IterativeClosestFinder(-70);
+            int actual = BST.FindClosestValueIteratively(treeOne, -70);
             Assert.AreEqual(expected, actual);
         }
 
@@ -33,7 +33,7 @@ namespace Algorithms.UnitTest
         public void RecursiveClosestFinder()
         {
             int expected = 100;
-            int actual = treeOne.RecursiveClosestFinder(100);
+            int actual = BST.FindClosestValueRecursively(treeOne, 100);
             Assert.AreEqual(expected, actual);
         }
 
@@ -73,7 +73,7 @@ namespace Algorithms.UnitTest
         public void ValidateBinarySearchTree()
         {
             bool expected = true;
-            bool actual = BinarySearchTreeMethods.ValidateBinarySearchTree(treeOne);
+            bool actual = BST.Validate(treeOne);
             Assert.AreEqual(expected, actual);
         }
 
@@ -81,7 +81,7 @@ namespace Algorithms.UnitTest
         public void CheckSimilarity()
         {
             bool expected = true;
-            bool actual = BinarySearchTreeMethods.CheckSimilarity(new List<int>(){10, 15, 8, 12, 94, 81, 5, 2, 11}, new List<int>(){10, 8, 5, 15, 2, 12, 11, 94, 81});
+            bool actual = BST.CheckSimilarity(new List<int>(){10, 15, 8, 12, 94, 81, 5, 2, 11}, new List<int>(){10, 8, 5, 15, 2, 12, 11, 94, 81});
             Assert.AreEqual(expected, actual);
         }
     }

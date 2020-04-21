@@ -1,4 +1,4 @@
-using Algorithms.Application;
+using Algorithms.Problems;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -35,7 +35,7 @@ namespace Algorithms.UnitTest
         public void MaxPathSum_OnTreeHoldingAllPositiveNodes()
         {
             int expected = 18;
-            int actual = BinaryTreeMethods.MaxPathSum(treeOne);
+            int actual = BT.MaxPathSum(treeOne);
             Assert.AreEqual(expected, actual);
         }
 
@@ -43,7 +43,7 @@ namespace Algorithms.UnitTest
         public void MaxPathSum_OnTreeHoldingPositiveAndNegetiveNodes()
         {
             int expected = 6;
-            int actual = BinaryTreeMethods.MaxPathSum(treeTwo);
+            int actual = BT.MaxPathSum(treeTwo);
             Assert.AreEqual(expected, actual);
         }
 
@@ -52,7 +52,7 @@ namespace Algorithms.UnitTest
         {
             List<int> expected = new List<int>() {4, 2, 5, 1, 6, 3, 7};
             List<int> actual = new List<int>();
-            BinaryTreeMethods.IterativeInOrderTraversal(treeOne, e => { actual.Add(e.value); });
+            BT.InOrder(treeOne, e => { actual.Add(e.value); });
             Assert.AreEqual(expected, actual);
         }
 
@@ -61,7 +61,7 @@ namespace Algorithms.UnitTest
         {
             List<int> expected = new List<int>() {1, 2, 4, 5, 3, 6, 7};
             List<int> actual = new List<int>();
-            BinaryTreeMethods.IterativePreOrderTraversal(treeOne, e => { actual.Add(e.value); });
+            BT.PreOrder(treeOne, e => { actual.Add(e.value); });
             Assert.AreEqual(expected, actual);
         }
 
@@ -70,7 +70,7 @@ namespace Algorithms.UnitTest
         {
             List<int> expected = new List<int>() {4, 5, 2, 6, 7, 3, 1};
             List<int> actual = new List<int>();
-            BinaryTreeMethods.IterativePostOrderTraversal(treeOne, e => { actual.Add(e.value); });
+            BT.PostOrder(treeOne, e => { actual.Add(e.value); });
             Assert.AreEqual(expected, actual);
         }
     }
